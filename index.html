@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Sonia ❤️</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', system-ui, -apple-system, sans-serif; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #ffe0ea, #ff4f79);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+    /* Falling hearts */
+    .hearts { position: fixed; inset: 0; pointer-events: none; }
+    .heart-fall { position: absolute; top: -10vh; opacity: .85; animation: fall linear forwards; }
+    @keyframes fall { to { transform: translateY(120vh) rotate(360deg); opacity: .15; } }
+
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(14px);
+      border-radius: 30px;
+      padding: 28px 22px 26px;
+      width: 94%; max-width: 440px;
+      box-shadow: 0 30px 60px rgba(0,0,0,.28);
+      animation: float 4s ease-in-out infinite;
+      position: relative;
+    }
+    h1 { font-size: 2.15rem; margin-bottom: 4px; }
+    h2 { font-weight: 500; opacity: .95; margin-bottom: 10px; }
+    p { font-size: 1.05rem; margin: 12px 0 18px; line-height: 1.55; }
+    .big-heart { font-size: 3.4rem; margin: 8px 0; animation: pulse 1.4s infinite; }
+
+    /* Photo frame */
+    .photo {
+      width: 140px; height: 140px; border-radius: 18px;
+      margin: 10px auto 14px;
+      background: rgba(255,255,255,.35);
+      display: grid; place-items: center;
+      color: #ff3b6b; font-weight: 600;
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,.45);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
+
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+    button {
+      background: #ff2f63; border: none; padding: 12px 22px;
+      border-radius: 999px; font-size: 1rem; color: #fff; cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      box-shadow: 0 12px 26px rgba(0,0,0,.3);
+    }
+    button.secondary { background: #ffffff; color: #ff2f63; position: relative; }
+    button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 16px 34px rgba(0,0,0,.38); }
+
+    .hidden { display: none; }
+    #reply { margin-top: 14px; font-size: 1.15rem; }
+
+    .note {
+      margin-top: 16px; padding: 14px; border-radius: 18px;
+      background: rgba(255,255,255,.25);
+      font-size: .98rem; line-height: 1.5;
+    }
+
+    .music { margin-top: 14px; font-size: .95rem; opacity: .95; }
+    .music button { padding: 8px 16px; font-size: .9rem; background:#fff; color:#ff2f63; }
+
+    @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.2)} 100%{transform:scale(1)} }
+    @keyframes float { 0%{transform:translateY(0)} 50%{transform:translateY(-10px)} 100%{transform:translateY(0)} }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="card">
+    <h1>Happy Valentine’s Day</h1>
+    <h2>Dear Sonia 🌹</h2>
+    <div class="big-heart">❤</div>
+
+    <div class="photo">
+      <img src="couple.jpg" alt="Us together">
+    </div>
+
+    <p>
+      This little picture for us — a reminder that your smile
+      makes ordinary moments feel special.
+    </p>
+
+    <p><strong>Will you be my Valentine?</strong></p>
+    <div class="btns">
+      <button onclick="sayYes()">Yes 💖</button>
+      <button id="noBtn" class="secondary">No 🙈</button>
+    </div>
+
+    <div id="reply" class="hidden"></div>
+
+    <div class="note hidden" id="note">
+      Baby, u r the only person that truely 'gets' me.
+      Spending time with u is the only thing I want to do this Valentine's.🌸
+      💖I Love You, Nungcbi💖
+    </div>
+
+    <div class="music">
+      <button onclick="toggleMusic()">Play / Pause music 🎵</button>
+      <audio id="song" loop>
+        <!-- Optional: add your song file source below -->
+        <source src="" type="audio/mpeg" />
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    // Falling hearts
+    const hearts = document.getElementById('hearts');
+    setInterval(() => {
+      const h = document.createElement('div');
+      h.className = 'heart-fall';
+      h.textContent = '❤';
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.animationDuration = 3 + Math.random() * 3 + 's';
+      h.style.fontSize = 14 + Math.random() * 24 + 'px';
+      hearts.appendChild(h);
+      setTimeout(() => h.remove(), 6500);
+    }, 200);
+
+    function sayYes() {
+      const r = document.getElementById('reply');
+      const n = document.getElementById('note');
+      r.textContent = 'This made the day brighter 💞';
+      r.classList.remove('hidden');
+      n.classList.remove('hidden');
+    }
+
+    // Playful moving NO button
+    const noBtn = document.getElementById('noBtn');
+    noBtn.addEventListener('mouseenter', moveNo);
+    noBtn.addEventListener('touchstart', moveNo);
+    function moveNo() {
+      const dx = (Math.random() * 140 - 70);
+      const dy = (Math.random() * 80 - 40);
+      noBtn.style.transform = `translate(${dx}px, ${dy}px)`;
+    }
+
+    function toggleMusic() {
+      const a = document.getElementById('song');
+      if (!a.src) return; // add a file to enable
+      a.paused ? a.play() : a.pause();
+    }
+  </script>
+</body>
+</html>
